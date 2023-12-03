@@ -45,7 +45,7 @@ class ShowAccountBalanceCommand extends Command
             $this->handleEventData($item);
         }
 
-        $io->success('Current Account Amount: '.number_format($this->balance, 2, ',', '.').'.');
+        $io->success('There are currently '.number_format($this->balance, 2, ',', '.').' in the account.');
 
         return Command::SUCCESS;
     }

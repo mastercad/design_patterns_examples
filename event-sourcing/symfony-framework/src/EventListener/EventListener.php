@@ -8,7 +8,7 @@ use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
 final class EventListener
 {
-    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly EventConverter $eventConverter)
+    public function __construct(private readonly EntityManagerInterface $entityManager)
     {
     }
 
