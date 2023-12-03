@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Entity\Event;
+use App\Services\NumberFormatter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -45,7 +46,7 @@ class ShowAccountBalanceCommand extends Command
             $this->handleEventData($item);
         }
 
-        $io->success('There are currently '.number_format($this->balance, 2, ',', '.').' in the account.');
+        $io->success('There are currently '.NumberFormatter::format($this->balance).' in the account.');
 
         return Command::SUCCESS;
     }

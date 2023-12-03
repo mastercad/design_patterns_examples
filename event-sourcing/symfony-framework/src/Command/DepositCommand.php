@@ -4,6 +4,7 @@ namespace App\Command;
 
 use App\Events\PaidIn;
 use App\Command\EventCommand;
+use App\Services\NumberFormatter;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -37,7 +38,7 @@ class DepositCommand extends EventCommand
 
         $this->trigger(new PaidIn($account, $amount));
 
-        $io->success($amount.'€ were successfully deposited.');
+        $io->success(NumberFormatter::format($amount).'€ were successfully deposited.');
 
         return Command::SUCCESS;
     }

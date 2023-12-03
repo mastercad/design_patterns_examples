@@ -4,6 +4,7 @@ namespace App\Command;
 
 use App\Events\ChargedBack;
 use App\Command\EventCommand;
+use App\Services\NumberFormatter;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -37,7 +38,7 @@ class ChargeBackCommand extends EventCommand
 
         $this->trigger(new ChargedBack($account, $amount));
 
-        $io->success($amount.'€ were successfully paid back.');
+        $io->success(NumberFormatter::format($amount).'€ were successfully paid back.');
 
         return Command::SUCCESS;
     }
