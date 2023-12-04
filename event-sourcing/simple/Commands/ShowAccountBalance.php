@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Commands;
 
 require_once __DIR__.'/../EventStorage.php';
+require_once __DIR__.'/../Exceptions/AccountDoesNotExistsException.php';
 
-use Events\EventInterface;
 use EventStorage;
+use Exceptions\AccountDoesNotExistsException;
 
 final class ShowAccountBalance
 {
@@ -19,13 +20,17 @@ final class ShowAccountBalance
 
     public function execute(string $account)
     {
-        $data = $this->eventStorage->loadAccount($account);
+        try {
+            $data = $this->eventStorage->loadAccount($account);
 
-        foreach ($data as $item) {
-            $this->handleEventData($item);
+            foreach ($data as $item) {
+                $this->handleEventData($item);
+            }
+
+            return number_format($this->balance, 2, ',', '.');
+        } catch (AccountDoesNotExistsException $exception) {
+            return 0;
         }
-
-        return number_format($this->balance, 2, ',', '.');
     }
 
     private function handleEventData(array $eventData)
@@ -36,6 +41,9 @@ final class ShowAccountBalance
                 break;
             case 'Events\PaidOut':
                 $this->balance -= (float) $eventData['amount'];
+                break;
+            case 'Events\ChargedBack':
+                $this->balance += (float) $eventData['amount'];
                 break;
         }
     }

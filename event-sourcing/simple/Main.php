@@ -26,4 +26,10 @@ echo "Current Balance of existing Account #122453123:\n";
 $showAccountBalanceCommand = new ShowAccountBalance($eventStorage);
 $balance = $showAccountBalanceCommand->execute('#122453123');
 
-echo $balance;
+echo $balance."\n";
+
+echo "Current Balance of not existing Account #5422123412:\n";
+
+$balance = $showAccountBalanceCommand->execute('#5422123412');
+
+echo $balance."\n";

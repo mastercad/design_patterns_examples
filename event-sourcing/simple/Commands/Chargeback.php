@@ -10,11 +10,11 @@ use Events\ChargedBack;
 
 final class Chargeback extends EventCommand
 {
-    public function execute()
+    public function execute(string $account, float $amount)
     {
         /* do some logic here */
 
-        $event = new ChargedBack();
+        $event = new ChargedBack($account, $amount);
         $this->trigger($event);
     }
 }

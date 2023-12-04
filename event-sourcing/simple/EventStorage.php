@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-use Events\EventInterface;
-
 require_once __DIR__.'/Events/EventInterface.php';
+require_once __DIR__.'/Exceptions/AccountDoesNotExistsException.php';
+
+use Events\EventInterface;
+use Exceptions\AccountDoesNotExistsException;
 
 final class EventStorage
 {
@@ -38,6 +40,10 @@ final class EventStorage
             if ($item['account'] === $account) {
                 $accountData[] = $item;
             }
+        }
+
+        if (empty($accountData)) {
+            throw new AccountDoesNotExistsException($account);
         }
 
         return $accountData;
