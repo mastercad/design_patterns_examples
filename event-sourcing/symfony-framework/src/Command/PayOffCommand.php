@@ -14,7 +14,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'app:pay-off',
-    description: 'Add a short description for your command',
+    description: 'Pays an amount from an account',
 )]
 class PayOffCommand extends EventCommand
 {

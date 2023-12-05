@@ -15,7 +15,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 #[AsCommand(
     name: 'app:show-account-balance',
-    description: 'Add a short description for your command',
+    description: 'Show account balance',
 )]
 class ShowAccountBalanceCommand extends Command
 {

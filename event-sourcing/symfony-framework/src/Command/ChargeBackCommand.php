@@ -14,7 +14,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'app:charge-back',
-    description: 'Add a short description for your command',
+    description: 'Transfers an amount back to an account',
 )]
 class ChargeBackCommand extends EventCommand
 {
