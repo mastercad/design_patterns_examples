@@ -7,14 +7,22 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-amqp": "*",
+        "doctrine/doctrine-bundle": "^2.11",
+        "doctrine/orm": "^2.17",
+        "scienta/doctrine-json-functions": "^5.3",
+        "symfony/amqp-messenger": "7.0.*",
         "symfony/console": "7.0.*",
         "symfony/dotenv": "7.0.*",
+        "symfony/event-dispatcher": "7.0.*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "7.0.*",
+        "symfony/messenger": "7.0.*",
         "symfony/runtime": "7.0.*",
         "symfony/yaml": "7.0.*"
     },
     "require-dev": {
+        "symfony/maker-bundle": "^1.52"
     },
     "config": {
         "allow-plugins": {
@@ -61,8 +69,9 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
-            "require": "7.0.*"
+            "allow-contrib": "true",
+            "require": "7.0.*",
+            "docker": true
         }
     }
 }

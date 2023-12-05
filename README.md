@@ -15,16 +15,20 @@ Here I would just like to use a simple example to show how event sourcing is gen
 
 Neither a framework nor additional services or technologies are intentionally used in order to keep the focus clearly on the actual logic of the pattern.
 
+[Source](https://github.com/mastercad/design_patterns_examples/tree/master/event-sourcing/simple)
+
 #### Usage
 
 Edit Main.php and add there command calls to manipulate accounts or show there balance. Example is already provided.
 
-## symfony framework <a name="event-sourcing-symfony-framework"></a>
+### symfony framework <a name="event-sourcing-symfony-framework"></a>
 Here the simple example was expanded to include the use of Symfony as a framework and a nosql database was used instead of the file system.
 
 Symfony deleted the event handler and replaced it with listeners that handle the various events.
 
 Here it is possible to catch the events with more specific listener and thus respond to more specific needs per event.
+
+[Source](https://github.com/mastercad/design_patterns_examples/tree/master/event-sourcing/symfony-framework)
 
 #### Usage
 
@@ -35,6 +39,10 @@ build container with
 execute composer install
 
 `docker compose exec php composer install`
+
+create database schema
+
+`docker compose exec php bin/console doctrine:schema:create`
 
 run commands, for example:
 
@@ -53,11 +61,49 @@ app:pay-off              Add a short description for your command
 app:show-account-balance Show account balance
 ```
 
-## symfony framework with message bus <a name="event-sourcing-symfony-framework-with-message-bus"></a>
+### symfony framework with message bus <a name="event-sourcing-symfony-framework-with-message-bus"></a>
+
 Here the Symfony framework example has been expanded to include the message bus. This means that events are no longer processed within the application, but are handled externally via a message bus. This enables events to be scaled and handled decentrally, regardless of the current application.
 
-## CQRS
+[Source](https://github.com/mastercad/design_patterns_examples/tree/master/event-sourcing/message-bus)
 
-## DDD
+#### Usage
 
-## Event Sourcing with Message Bus, CQRS, DDD with Symfony Framework
+build container with
+
+`docker compose up --build`
+
+execute composer install
+
+`docker compose exec php composer install`
+
+create database schema
+
+`docker compose exec php bin/console doctrine:schema:create`
+
+run commands, for example:
+
+`docker compose exec php bin/console app:deposit --account="#63452" --amount="5623"`
+
+or show account balance:
+
+`docker compose exec php bin/console app:show-account-balance --account="#63452"`
+
+available commands are:
+
+```sh
+app:charge-back          Transfers an amount back to an account
+app:deposit              Deposits an amount into an account
+app:pay-off              Add a short description for your command
+app:show-account-balance Show account balance
+```
+
+consume messages:
+
+`docker compose exec php php bin/console messenger:consume async`
+
+### CQRS
+
+### DDD
+
+### Event Sourcing with Message Bus, CQRS, DDD with Symfony Framework
